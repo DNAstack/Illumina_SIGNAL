@@ -1,0 +1,12 @@
+{
+  "run_signal.accession": "String",
+  "run_signal.fastq_R1s": "Array[File]",
+  "run_signal.fastq_R2s": "Array[File]",
+  "run_signal.scheme_bed": "File",
+  "run_signal.viral_reference_genome": "File",
+  "run_signal.viral_reference_feature_coords": "File",
+  "run_signal.viral_reference_contig_name": "MN908947.3",
+  "run_signal.primer_pairs_tsv": "File",
+  "run_signal.amplicon_bed": "File",
+  "run_signal.container_registry": "dnastack"
+}
