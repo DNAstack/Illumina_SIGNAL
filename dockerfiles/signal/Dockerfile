@@ -1,4 +1,4 @@
-# TAG dnastack/signal:918654d
+# TAG dnastack/signal:e6cae1e
 FROM continuumio/miniconda3:4.9.2
 
 # Based on https://github.com/jaleezyy/covid-19-signal/blob/master/resources/Dockerfile_pipeline
@@ -21,10 +21,10 @@ RUN apt-get -qq --allow-releaseinfo-change update && \
 # N.B. that this makes the final Docker image ~10 GB
 RUN mkdir /data
 RUN	wget https://storage.googleapis.com/dnastack-data-ingestion-storage/resources/Kraken2.tar.gz && \
-	tar -zxvf Kraken2.tar.gz --directory /opt && \
+	tar -zxvf Kraken2.tar.gz --directory /data && \
 	rm Kraken2.tar.gz
 RUN wget https://storage.googleapis.com/dnastack-data-ingestion-storage/resources/composite_human_viral_reference.tar.gz && \
-	tar -zxvf composite_human_viral_reference.tar.gz --directory /opt && \
+	tar -zxvf composite_human_viral_reference.tar.gz --directory /data && \
 	rm composite_human_viral_reference.tar.gz
 
 ENV KRAKEN2_DB /data/Kraken2/db
@@ -39,7 +39,7 @@ RUN git clone https://github.com/jaleezyy/covid-19-signal
 # set workdir to pipeline folder in repo
 WORKDIR /covid-19-signal
 
-ENV SIGNAL_VERSION 918654d9d59097d553a7b4be8bb1a8a46b0ab0d9
+ENV SIGNAL_VERSION e6cae1eaa375409f368aa50c6616e8bb24e0243a
 RUN git checkout ${SIGNAL_VERSION}
 
 # install all snakemake rule conda envs using dummy snakemake file
@@ -53,6 +53,3 @@ RUN conda run \
 	--cores 8
 
 COPY ./scripts/* /usr/local/bin/
-
-# Do not automatically update pangolin; can both break output and reach github rate limits in AWS
-RUN sed -i 's/\(^[^d]*update_pangolin()\)/#\1/' /covid-19-signal/scripts/assign_lineages.py

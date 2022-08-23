@@ -66,7 +66,7 @@ task signal {
 	Int num_paired_fastqs = length(fastq_R1s)
 
 	command <<<
-		set -eEo pipefail
+		set -exEo pipefail
 
 		ln -s /covid-19-signal/scripts/ "$(pwd)"
 
@@ -96,13 +96,24 @@ task signal {
 			var_min_variant_quality: 20
 			amplicon_loc_bed: '~{amplicon_bed}'
 			phylo_include_seqs: ''
-			negative_control_prefix: []" \
+			negative_control_prefix: []
+			pangolin_fast: False
+			pangolin: '4.0.6'
+			constellations: '0.1.9'
+			scorpio: '0.3.17'
+			pangolearn: ''
+			pango-designation: ''
+			pangolin-data: '1.8'
+			nextclade-data: ''
+			nextclade-include-recomb: True" \
 		| tr -d '\t' > config.yaml
 
 		count=0
 		while [[ "$count" -lt ~{num_paired_fastqs} ]]; do
 			echo "~{accession}" >> samplename.tmp
+			set +e
 			((count++))
+			set -e
 		done
 		echo -e "~{sep='\n' fastq_R1s}" >> fastq_R1s.tmp
 		echo -e "~{sep='\n' fastq_R2s}" >> fastq_R2s.tmp
@@ -231,10 +242,10 @@ task signal {
 	}
 
 	runtime {
-		docker: "~{container_registry}/signal:918654d"
+		docker: "~{container_registry}/signal:e6cae1e"
 		cpu: threads
 		memory: "32 GB"
 		disks: "local-disk 500 HDD"
-		bootDiskSizeGb: 20
+		bootDiskSizeGb: 30
 	}
 }
