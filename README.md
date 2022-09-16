@@ -53,7 +53,7 @@ paste \
 
 ## Containers
 
-Docker image definitions can be found in [dockerfiles](./dockerfiles).
+Docker image definitions can be found in our [bioinformatics-public-docker-images](https://github.com/DNAstack/bioinformatics-public-docker-images) repo.
 
 The pipeline will always be pegged to a specific SIGNAL commit hash to avoid breaking due to updates to SIGNAL. The pipeline is periodically updated to the most recent version of the SIGNAL pipeline.
 
