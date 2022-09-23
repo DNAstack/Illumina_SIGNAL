@@ -242,7 +242,7 @@ task signal {
 	}
 
 	runtime {
-		docker: "~{container_registry}/signal:e6cae1e"
+		docker: "~{container_registry}/signal:1.5.6"
 		cpu: threads
 		memory: "32 GB"
 		disks: "local-disk 500 HDD"
