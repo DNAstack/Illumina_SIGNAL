@@ -55,8 +55,6 @@ paste \
 
 Docker image definitions can be found in our [bioinformatics-public-docker-images](https://github.com/DNAstack/bioinformatics-public-docker-images) repo.
 
-The pipeline will always be pegged to a specific SIGNAL commit hash to avoid breaking due to updates to SIGNAL. The pipeline is periodically updated to the most recent version of the SIGNAL pipeline.
-
 All containers are publicly hosted in [DNAstack's container registry](https://hub.docker.com/u/dnastack).
 
 N.B. that the SIGNAL Docker container is ~10 GB to allow it to be used at scale in AWS, where EBS auto-scaling can sometimes not expand rapidly enough to accomodate running hundreds of samples in parallel. Including reference data in the Docker container seems to solve this issue, but does make it somewhat unwieldly.
